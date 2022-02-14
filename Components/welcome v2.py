@@ -15,7 +15,7 @@ def welcome():
     name = (names[num])
     print("*** Welcome to The Best Pizza You Will Ever Eat ***")
     print("*** My name is" ,name, "***")
-    print("You and me we got this Im here to hep you order your BEST pizza")
+    print("You and me we got this Im here to help you order your BEST pizza")
 
 
 def main():

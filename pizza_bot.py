@@ -27,7 +27,7 @@ def pickup():
     print ("If delivery isn't your style rather order it for pickup by typing in 2 instead")
     while True:
         try: 
-            delivery = int(input("Alright time to choose delivery or pickup?"   )) 
+            delivery = int(input("Alright time to choose delivery or pickup? "   )) 
             if delivery >= 1 and delivery <= 2:      
                 if delivery == 1:
                     print ("Delivery it is see you soon with your BEST pizza")

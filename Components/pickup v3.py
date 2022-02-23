@@ -24,3 +24,5 @@ while not valid:
         break
     else:
         print("Sorry but I need your phone number in order to complete your pickup order")
+
+print (customer_details)

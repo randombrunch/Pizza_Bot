@@ -1,4 +1,11 @@
 # Pizza bot program
+# 18/02/2022
+# Bugs - Phone number input allows letters 
+#      - Name input allows numbers 
+
+
+
+
 import random
 from random import randint
 
@@ -13,7 +20,7 @@ def not_blank(question):
     while not valid:
         response = input(question)
         if response != "":
-            return response 
+            return response.title()
         else:
             print("Sorry buddy but I need your details or else this pickup won't work")
 

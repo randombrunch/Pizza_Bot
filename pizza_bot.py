@@ -4,6 +4,19 @@ from random import randint
 
 # List of random names
 names = ["Mark", "Sally", "Robbie", "Phill", "Fredrick", "Jeremy", "Gregory", "Susan", "Fritz", "Gabriel"]
+# Customer details dictionary 
+customer_details = {}
+
+# Valitate inputs to check if they are blank
+def not_blank(question):
+    valid = False 
+    while not valid:
+        response = input(question)
+        if response != "":
+            return response 
+        else:
+            print("Sorry buddy but I need your details or else this pickup won't work")
+
 
 def welcome():
     '''
@@ -21,8 +34,8 @@ def welcome():
     
     # Menu for pickup or delivery
 
-def pickup(): 
-    print ("Hey buddy would you prefer I delivery to your address or you come pick it up?")
+def order_type(): 
+    print ("But first would you prefer I delivery to your address or you come pick it up?")
     print ("If you want I can delivery it to you if you want just type the number 1")
     print ("If delivery isn't your style rather order it for pickup by typing in 2 instead")
     while True:
@@ -32,10 +45,10 @@ def pickup():
                 if delivery == 1:
                     print ("Delivery it is see you soon with your BEST pizza")
                     break
-            
                 elif delivery == 2:
                     print ("Alright pickup it is it'll be nice and warm by the time you get here") 
-                    break    
+                    pickup() 
+                    break  
             else: 
                 print ("Sorry buddy I think you typed it wrong don't worry try again, if you want delivery type 1 or if you want pickup type 2")
         except ValueError:
@@ -44,11 +57,16 @@ def pickup():
 
 
 
-
-
-
 # Pick up information  - name and phone number  
+def pickup():
+    question = ("Alright now can I get your name please ")
+    customer_details['name'] = not_blank(question )
+    # print (customer_details['name'])
 
+    question = ("Nice job now can you please give me your phone number ")
+    customer_details['phone'] = not_blank(question )
+    # print (customer_details['phone'])
+    print(customer_details)
 
 
 
@@ -98,6 +116,7 @@ def pickup():
 
 
 
+
 # Main function
 def main():
     '''
@@ -107,6 +126,7 @@ def main():
     Returns: None 
     '''
     welcome()
-    pickup()
+    order_type()
+    
 
 main()

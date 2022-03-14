@@ -51,10 +51,11 @@ def order_type():
             if delivery >= 1 and delivery <= 2:      
                 if delivery == 1:
                     print ("Delivery it is see you soon with your BEST pizza")
+                    delivery_info()
                     break
                 elif delivery == 2:
                     print ("Alright pickup it is it'll be nice and warm by the time you get here") 
-                    pickup() 
+                    pickup_info() 
                     break  
             else: 
                 print ("Sorry buddy I think you typed it wrong don't worry try again, if you want delivery type 1 or if you want pickup type 2")
@@ -65,24 +66,41 @@ def order_type():
 
 
 # Pick up information  - name and phone number  
-def pickup():
+def pickup_info():
     question = ("Alright now can I get your name please ")
     customer_details['name'] = not_blank(question )
-    # print (customer_details['name'])
+    print (customer_details['name'])
 
     question = ("Nice job now can you please give me your phone number ")
     customer_details['phone'] = not_blank(question )
-    # print (customer_details['phone'])
+    print (customer_details['phone'])
     print(customer_details)
 
 
 
-
-
 # Delivery information - name address and phone 
+def delivery_info():
+    question = ("Alright now can I get your name please ")
+    customer_details['name'] = not_blank(question )
+    print (customer_details['name'])
+
+    question = ("Nice job now can you please give me your phone number ")
+    customer_details['phone'] = not_blank(question )
+    print (customer_details['phone'])
+        
+    question = ("Good now in order to delivery we need your house information starting with your house number ")
+    customer_details['home'] = not_blank(question)
+    print (customer_details['home'])
+
+    question = ("Now I need your street name please ")
+    customer_details['street'] = not_blank(question)
+    print (customer_details['street'])
 
 
-
+    question = ("Finally I need your suburb then your delivery information will be complete ")
+    customer_details['suburb'] = not_blank(question)
+    print (customer_details['suburb'])
+    print(customer_details)
 
 
 # Choose total Number of Pizzas - max 5

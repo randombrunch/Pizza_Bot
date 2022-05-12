@@ -7,6 +7,7 @@
 
 
 import random
+import sys
 from random import randint
 
 # List of random names
@@ -54,6 +55,7 @@ def welcome():
     # Menu for pickup or delivery
 
 def order_type(): 
+    del_pick = ""
     print ("But first would you prefer I delivery to your address or you come pick it up?")
     print ("If you want I can delivery it to you if you want just type the number 1")
     print ("If delivery isn't your style rather order it for pickup by typing in 2 instead")
@@ -63,10 +65,14 @@ def order_type():
             if delivery >= 1 and delivery <= 2:      
                 if delivery == 1:
                     print ("Delivery it is see you soon with your BEST pizza")
+                    order_list.append("Delivery Charge")
+                    order_cost.append(5)
                     delivery_info()
+                    del_pick = "delivery" 
                     break
                 elif delivery == 2:
-                    print ("Alright pickup it is it'll be nice and warm by the time you get here") 
+                    print ("Alright pickup it is it'll be nice and warm by the time you get here")
+                    del_pick = "pickup"
                     pickup_info() 
                     break  
             else: 
@@ -74,6 +80,7 @@ def order_type():
         except ValueError:
             print ("Sorry buddy I think you typed it wrong don't worry try again")
             print ("If you want delivery type 1 or if you want pickup type 2")
+    return del_pick
 
 
 
@@ -143,7 +150,7 @@ def order_pizza():
                 print("Sorry Sir/Maam but your number must between 1 - 5")
         except ValueError:
             print("Sorry but that is not a valid number")
-            print("Pleases enter a number from 1 to 5")
+            print("Pleases enter a number from 1 to 5 ")
 
     print (num_pizzas)
 
@@ -153,7 +160,7 @@ def order_pizza():
         while num_pizzas > 0:
             while True:
                 try:
-                    pizza_ordered = int(input("Please select the pizza you want if the corrosponding number"))
+                    pizza_ordered = int(input("Please select the pizza you want if the corrosponding number "))
                     if pizza_ordered >= 1 and pizza_ordered <= 12:
                         break
                     else:
@@ -175,17 +182,86 @@ def order_pizza():
 
 # Print order out - including if order is deliverying or pick up and names and price of each pizza - total cost including any delivery charge 
 
+def print_order(del_pick):
+    total_cost = sum(order_cost)
+    print ("Customer Details")
+    if del_pick == "Pickup":
+        print (f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+        print ("Your order will be for pickup")
+    elif del_pick == "Delivery":
+        print ("Your order will be delivered too you")
+        print (f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+    
+    print() 
+    print("Order Details")
+    count = 0
+    for item in order_list:
+        print("Ordered: {}  Cost ${:.2f}".format(item, order_cost[count]))
+        count = count+1
+    print()
+    print("Total Order Cost")
+    print(f"${total_cost:.2f}")
 
 
 
 # Ability to cancel or proceed with order 
+def confirm_cancel():
+    print ("Is this your correct order?")
+    print ("To confirm presss 1")
+    print ("To cancel press 2")
+    while True:
+        try:
+            confirm = int(input("Please enter a number "))
+            if confirm >= 1 and confirm <= 2:
+                if confirm == 1:
+                    print ("Order is all good to go")
+                    new_exit()
+                    break
+
+                elif confirm == 2:
+                    print ("Alright your order has been canceled")
+                    new_exit()
+                    break
+            else:
+                print ("The number must be 1 or 2")
+        except ValueError:
+            print ("Sorry that is not a valid number")
+            print ("Please put numbers 1 or 2")
 
 
+ 
 
 
 
 # Option for new order or to exit 
+def new_exit():
+    print ("Do you want to start another order?")
+    print ("For yes press 1")
+    print ("To exit press 2")
+    while True:
+        try:
+            confirm = int(input("Please enter a number "))
+            if confirm >= 1 and confirm <= 2:
+                if confirm == 1:
+                    print ("New order")
+                    order_list.clear()
+                    order_cost = [].clear()
+                    customer_details.clear()
+                    main()
+                    break
 
+                elif confirm == 2:  
+                    print ("Alright hope you enjoy your pizza   ")
+                    order_list.clear()
+                    order_cost = [].clear()
+                    customer_details.clear()
+                    sys.exit()
+                    break
+            else:
+                print ("The number must be 1 or 2")
+        except ValueError:
+            print ("Sorry that is not a valid number")
+            print ("Please put numbers 1 or 2")
 
 
 
@@ -201,8 +277,10 @@ def main():
     Returns: None 
     '''
     welcome()
-    order_type()
+    del_pick = order_type()
     menu()
     order_pizza()
+    print_order(del_pick)
+    confirm_cancel()
 
 main()
